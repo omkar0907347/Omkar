@@ -1,0 +1,32 @@
+def insertion(arr1):
+    n=len(arr1)
+    for i in range (1,n):
+        key=arr1[i]
+        j=i-1
+        while j>=0 and key <arr1[j]:
+            arr1[j+1]=arr1[j]
+            j-=1
+        arr1[j+1]=key
+        
+        
+def bubble(arr1):
+    n=len(arr1)
+    for i in range(n):
+        swapped=False
+        for j in range(0,n-i-1):
+            if arr1[j]>arr1[j+1]:
+                arr1[j],arr1[j+1]=arr1[j+1],arr1[j]
+                swapped=True
+        if not swapped:
+                break
+            
+def top_five_saleries(arr1):
+    arr1.sort(reverse=True)
+    top_5=arr1[:5]
+    print("top 5 highest saleries are :",top_5)
+arr1 = [359.25,254.58,325.025,774.025]
+insertion(arr1)
+bubble(arr1)
+print("sorted array by insertion sort izz :",arr1)
+print("sorted array by bubble sort izz :",arr1)
+top_five_saleries(arr1) Omkar
