@@ -1,0 +1,35 @@
+class TextEditor :
+    def __init__(self):
+        self.text=""
+        self.undo=[]
+        self.redo=[]
+        
+    def make_change(self,new_text):
+        self.undo.append(self.text)
+        if self.redo:
+            self.redo.pop()
+        self.text = new_text
+        print("change made",self.text)
+        
+    def undo_change(self):
+        if self.undo:
+            self.redo.append(self.text)
+            self.text=self.undo.pop()
+            print("undo:",self.text)
+        else :
+            print("nothing to undo")
+            
+    def redo_change(self):
+        if self.redo:
+            self.undo.append(self.text)
+            self.text=self.redo.pop()
+            print("redo",self.text)
+            
+        else :
+            print("noting in redo")
+            
+editor = TextEditor()
+editor.make_change("hello")
+editor.make_change("how are youhh")
+editor.undo_change()
+editor.redo_change()
