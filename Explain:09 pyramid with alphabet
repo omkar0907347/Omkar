@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main() {
+    int n = 4;
+    int i, j, k;
+    char ch;
+
+    for (i = 1; i <= n; i++) {
+        
+        for (j = i; j < n; j++)
+            printf("  ");
+
+        for (k = 1; k <= i; k++) {
+            ch = 'A' + k - 1;
+            printf("%c ", ch);
+        }
+
+        for (k = i - 1; k >= 1; k--) {
+            ch = 'A' + k - 1;
+            printf("%c ", ch);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
