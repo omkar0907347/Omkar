@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct Node {
+    char name[50];
+    struct Node *left, *right;
+};
+
+struct Node* createNode(char name[]) {
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    strcpy(newNode->name, name);
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+
+struct Node* insert(struct Node *root, char name[]) {
+    if (root == NULL)
+        return createNode(name);
+    if (strcmp(name, root->name) < 0)
+        root->left = insert(root->left, name);
+    else
+        root->right = insert(root->right, name);
+    return root;
+}
+
+void inorder(struct Node *root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%s ", root->name);
+        inorder(root->right);
+    }
+}
+
+void preorder(struct Node *root) {
+    if (root != NULL) {
+        printf("%s ", root->name);
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+void postorder(struct Node *root) {
+    if (root != NULL) {
+        postorder(root->left);
+        postorder(root->right);
+        printf("%s ", root->name);
+    }
+}
+
+void search(struct Node *root, char key[]) {
+    if (root == NULL) {
+        printf("Name not found!\n");
+        return;
+    }
+    if (strcmp(key, root->name) == 0)
+        printf("Name found: %s\n", root->name);
+    else if (strcmp(key, root->name) < 0)
+        search(root->left, key);
+    else
+        search(root->right, key);
+}
+
+int main() {
+    struct Node *root = NULL;
+    char name[50];
+    int n, i;
+    printf("Enter number of names: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter name %d: ", i + 1);
+        scanf("%s", name);
+        root = insert(root, name);
+    }
+
+    printf("\nInorder: ");
+    inorder(root);
+    printf("\nPreorder: ");
+    preorder(root);
+    printf("\nPostorder: ");
+    postorder(root);
+
+    printf("\n\nEnter name to search: ");
+    scanf("%s", name);
+    search(root, name);
+    return 0;
+}
+   
+
